@@ -30,7 +30,7 @@ SELECT user_likes.user_id FROM (
     WHERE liked = true
     GROUP BY user_id
 ) AS user_likes
-WHERE user_likes.like_count >= 1 
+WHERE user_likes.like_count >= 2 
 AND user_id NOT IN (
     SELECT DISTINCT user_id FROM notifications
 );
