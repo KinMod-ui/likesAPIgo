@@ -1,0 +1,47 @@
+-- The entire database has been cached using redis for query optimization
+-- Also for the purpose of notifications I have run a cron job
+-- every 1 minute for the sake of demo and on getting 2 likes which will notify
+-- the user after querying the database if the user match the 
+-- criteria and add the user to the notification table to mark it
+-- notified which can be seen in the main.go file 
+
+-- Run the commands in the following order
+
+make postgres
+
+make redis
+
+-- Now if we run `docker ps -a` we will get the list of containers
+
+make createdb
+
+make migrateup
+
+make test
+
+-- Now all the tests will pass (hopefully :p)
+-- The test also creates fake users from user_id 1 to 35 and
+-- fake content from content_id 1 to 15 which can be used by us
+
+go run main.go
+
+-- this will start the server and now we can use the api in the following manner
+
+-- Type of request 1
+-- This will make the user with user_id 12 like the content with
+-- content_id 12
+-- Here user_id can be any valid user_id and content_id the same otherwise it will error out
+
+curl -H 'Content-Type: application/json' \
+      -d '{ "user_id":"12" , "content_id" : "12"}' \
+      -X POST \
+    http://localhost:8080/likes
+
+-- Type of request 2
+-- This will check whether user with user_id 12 has liked
+-- the content with content_id 12
+curl http://localhost:8080/likes/12/12
+
+-- Type of request 3
+-- This will return the total number of likes of post 12
+curl http://localhost:8080/likes/totallikes/12
