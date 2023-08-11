@@ -17,6 +17,8 @@ make createdb
 
 make migrateup
 
+go mod download
+
 make test
 
 -- Now all the tests will pass (hopefully :p)
