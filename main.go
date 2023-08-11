@@ -39,7 +39,9 @@ func databaseQueryTask() {
 }
 
 func main() {
-    config, err := util.LoadConfig(".")
+        var err error
+	config, err = util.LoadConfig(".")
+
 
 	if err != nil {
 		log.Fatal("cannot load configuration:", err)
