@@ -5,34 +5,12 @@
 -- criteria and add the user to the notification table to mark it
 -- notified which can be seen in the main.go file 
 
--- Run the commands in the following order
+-- wait for it to print start the app as output
+-- I ran some tests so that we can have dummy data and also it tests
+-- and verifies the working of database connections.
 
-make postgres
-
-make redis
-
--- Now if we run `docker ps -a` we will get the list of containers
-
-make createdb
-
-
--- this will download the golang-migrate and move it into /usr/bin/migrate
--- would have been lot easier with docker-compose
-curl -L https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz | tar xvz
-sudo mv migrate /usr/bin/migrate
-
-make migrateup
-
-go mod download
-
-make test
-
--- Now all the tests will pass (hopefully :p)
--- The test also creates fake users from user_id 1 to 35 and
--- fake content from content_id 1 to 15 which can be used by us
-
-go run main.go
-
+-- run the below command
+docker compose up 
 -- this will start the server and now we can use the api in the following manner
 
 -- Type of request 1
