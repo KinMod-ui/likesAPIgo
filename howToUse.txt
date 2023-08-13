@@ -8,6 +8,9 @@
 -- wait for it to print start the app as output
 -- I ran some tests so that we can have dummy data and also it tests
 -- and verifies the working of database connections.
+-- The docker file is large in size because I wanted to give some dummy data by 
+-- running some tests which was only possible using golang as the base instead 
+-- of using the normal one which can be changed in the production environment.
 
 -- run the below command
 docker compose up 
