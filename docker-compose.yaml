@@ -6,6 +6,12 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=secret
       - POSTGRES_DB=likesApi
+
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+
   api:
     build:
       context: .
@@ -16,6 +22,7 @@ services:
       - DB_SOURCE=postgresql://root:secret@postgres:5432/likesApi?sslmode=disable
     depends_on:
       - postgres
+      - redis 
     entrypoint:
       [
         "/bin/sh",
